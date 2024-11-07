@@ -1,8 +1,10 @@
 use ryz_labs::*;
 use std::sync::Once;
 
+// Ensures logging initialization occurs only once across all test executions
 static INIT: Once = Once::new();
 
+// Initializes logging system with test-specific configuration
 fn initialize(test_name: &str) {
     INIT.call_once(|| {
         init_logging(test_name);
@@ -11,21 +13,25 @@ fn initialize(test_name: &str) {
 
 #[test]
 fn test_transaction_creation() {
+    // Initialize test environment with unique identifier
     initialize("test_transaction_creation");
     log_section_header("Start Test: Transaction Creation");
 
+    // Create sample deposit transaction for testing
     let deposit_transaction = Transaction {
         transaction_type: TransactionType::Deposit,
         wallet_address: String::from("wallet_1"),
         amount: 100,
     };
 
+    // Create sample withdrawal transaction for testing
     let withdrawal_transaction = Transaction {
         transaction_type: TransactionType::Withdrawal,
         wallet_address: String::from("wallet_2"),
         amount: 50,
     };
 
+    // Verify deposit transaction properties
     match deposit_transaction.transaction_type {
         TransactionType::Deposit => (),
         _ => panic!("Expected Deposit transaction type"),
@@ -33,6 +39,7 @@ fn test_transaction_creation() {
     assert_eq!(deposit_transaction.wallet_address, "wallet_1");
     assert_eq!(deposit_transaction.amount, 100);
 
+    // Verify withdrawal transaction properties
     match withdrawal_transaction.transaction_type {
         TransactionType::Withdrawal => (),
         _ => panic!("Expected Withdrawal transaction type"),
@@ -45,9 +52,11 @@ fn test_transaction_creation() {
 
 #[test]
 fn test_calculate_wallet_balance() {
+    // Test basic balance calculation functionality
     initialize("test_calculate_wallet_balance");
     log_section_header("Start Test: Calculate Wallet Balance");
 
+    // Create test transactions for balance calculation
     let transactions = vec![
         Transaction {
             transaction_type: TransactionType::Deposit,
@@ -61,6 +70,7 @@ fn test_calculate_wallet_balance() {
         },
     ];
 
+    // Verify correct balance calculation
     let balance = calculate_wallet_balance(&transactions, "wallet_1").unwrap();
     assert_eq!(balance, 70);
 
@@ -69,6 +79,7 @@ fn test_calculate_wallet_balance() {
 
 #[test]
 fn test_empty_transaction_list() {
+    // Test balance calculation with no transactions
     initialize("test_empty_transaction_list");
     log_section_header("Start Test: Empty Transaction List");
 
@@ -81,6 +92,7 @@ fn test_empty_transaction_list() {
 
 #[test]
 fn test_wallet_not_in_transactions() {
+    // Test balance for wallet with no associated transactions
     initialize("test_wallet_not_in_transactions");
     log_section_header("Start Test: Wallet Not in Transactions");
 
@@ -99,6 +111,7 @@ fn test_wallet_not_in_transactions() {
 
 #[test]
 fn test_multiple_deposits() {
+    // Test balance calculation with multiple deposit transactions
     initialize("test_multiple_deposits");
     log_section_header("Start Test: Multiple Deposits");
 
@@ -122,6 +135,7 @@ fn test_multiple_deposits() {
 
 #[test]
 fn test_multiple_withdrawals() {
+    // Test error handling for insufficient funds scenario
     initialize("test_multiple_withdrawals");
     log_section_header("Start Test: Multiple Withdrawals");
 
@@ -148,6 +162,7 @@ fn test_multiple_withdrawals() {
 
 #[test]
 fn test_mixed_transactions_multiple_wallets() {
+    // Test balance tracking across multiple wallets with mixed transactions
     initialize("test_mixed_transactions_multiple_wallets");
     log_section_header("Start Test: Mixed Transactions Multiple Wallets");
 
@@ -184,6 +199,7 @@ fn test_mixed_transactions_multiple_wallets() {
 
 #[test]
 fn test_invalid_transaction_amount() {
+    // Test system handling of invalid transaction amounts
     initialize("test_invalid_transaction_amount");
     log_section_header("Start Test: Invalid Transaction Amount");
 
@@ -203,6 +219,7 @@ fn test_invalid_transaction_amount() {
 
 #[test]
 fn test_insufficient_funds() {
+    // Test withdrawal exceeding available balance
     initialize("test_insufficient_funds");
     log_section_header("Start Test: Insufficient Funds");
 
@@ -233,6 +250,7 @@ fn test_insufficient_funds() {
 
 #[test]
 fn test_display_transaction() {
+    // Test transaction display formatting
     let transaction = Transaction {
         transaction_type: TransactionType::Deposit,
         wallet_address: String::from("wallet_1"),
@@ -243,6 +261,7 @@ fn test_display_transaction() {
 
 #[test]
 fn test_print_transaction_history() {
+    // Test transaction history display functionality
     initialize("test_print_transaction_history");
     log_section_header("Start Test: Print Transaction History");
 
@@ -259,7 +278,7 @@ fn test_print_transaction_history() {
         },
     ];
 
-    // Instead of trying to capture stdout, let's just verify the transaction display format
+    // Verify transaction display format
     let transaction = &transactions[0];
     assert_eq!(
         format!("{}", transaction),
@@ -272,17 +291,18 @@ fn test_print_transaction_history() {
         "Withdrawal of 30 to wallet_1"
     );
 
-    // Call print_transaction_history to ensure it doesn't panic
+    // Verify history printing functionality
     print_transaction_history(&transactions, "wallet_1");
 
     log_section_header("End Test: Print Transaction History");
 }
 
+// Terminal-specific test module
 mod terminal_tests {
     use super::*;
     use ryz_labs::terminal::WalletTerminal;
-    use std::io::Write;
 
+    // Initialize terminal instance for testing
     fn setup_terminal() -> WalletTerminal {
         initialize("test_terminal");
         WalletTerminal::new()
@@ -290,13 +310,13 @@ mod terminal_tests {
 
     #[test]
     fn test_terminal_creation() {
+        // Test terminal initialization
         let terminal = setup_terminal();
-        // Test the terminal through public methods instead
         let result = calculate_wallet_balance(&[], "test_wallet").unwrap();
         assert_eq!(result, 0);
     }
 
-    // Helper function to simulate transactions
+    // Helper function to process test transactions
     fn execute_transactions(transactions: Vec<Transaction>) -> Result<i64, WalletError> {
         let wallet_address = &transactions[0].wallet_address;
         calculate_wallet_balance(&transactions, wallet_address)
@@ -304,6 +324,7 @@ mod terminal_tests {
 
     #[test]
     fn test_terminal_operations() {
+        // Test basic terminal transaction operations
         let wallet = "test_wallet";
         let deposit_amount = 100;
         let withdrawal_amount = 30;
@@ -327,6 +348,7 @@ mod terminal_tests {
 
     #[test]
     fn test_terminal_insufficient_funds() {
+        // Test terminal handling of insufficient funds
         let wallet = "test_wallet";
         
         let transactions = vec![
@@ -354,6 +376,7 @@ mod terminal_tests {
 
     #[test]
     fn test_terminal_multiple_wallets() {
+        // Test terminal handling of multiple wallet operations
         let transactions = vec![
             Transaction {
                 transaction_type: TransactionType::Deposit,
@@ -376,6 +399,7 @@ mod terminal_tests {
 
     #[test]
     fn test_terminal_transaction_history() {
+        // Test terminal transaction history functionality
         let wallet = "history_wallet";
         
         let transactions = vec![
@@ -399,7 +423,7 @@ mod terminal_tests {
         let balance = calculate_wallet_balance(&transactions, wallet).unwrap();
         assert_eq!(balance, 120);
 
-        // Test transaction display
+        // Verify transaction display format
         let tx = &transactions[0];
         assert_eq!(
             format!("{}", tx),

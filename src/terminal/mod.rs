@@ -1,3 +1,6 @@
+//! Terminal interface module for the Ryz Labs Wallet Balance Tracker
+//! Provides interactive command-line functionality for wallet operations
+
 use std::io::{self, Write};
 use crate::{Transaction, TransactionType, print_transaction_history, calculate_wallet_balance};
 use log::{info, error};
@@ -5,11 +8,17 @@ use chrono::Local;
 use std::fs;
 use std::path::Path;
 
+/// Terminal interface for wallet operations
 pub struct WalletTerminal {
+    /// Vector storing all transactions processed in the current session
     pub(crate) transactions: Vec<Transaction>,
 }
 
 impl WalletTerminal {
+    /// Creates a new terminal instance with logging configuration
+    /// 
+    /// # Returns
+    /// * `Self` - Configured terminal instance ready for operation
     pub fn new() -> Self {
         if let Err(e) = Self::init_logging() {
             eprintln!("Warning: Failed to initialize logging: {}", e);
@@ -20,16 +29,22 @@ impl WalletTerminal {
         }
     }
 
+    /// Initializes the logging system for terminal operations
+    /// 
+    /// # Returns
+    /// * `io::Result<()>` - Success or failure of logging setup
     fn init_logging() -> io::Result<()> {
         // Create logs directory structure
         let log_dir = Path::new("logs/src");
         fs::create_dir_all(log_dir)?;
 
+        // Generate timestamped log file path
         let log_file_path = log_dir.join(format!(
             "terminal_{}.log",
             Local::now().format("%Y%m%d_%H%M%S")
         ));
 
+        // Configure and initialize logging
         fern::Dispatch::new()
             .format(|out, message, record| {
                 out.finish(format_args!(
@@ -47,10 +62,12 @@ impl WalletTerminal {
         Ok(())
     }
 
+    /// Starts the interactive terminal session
     pub fn run(&mut self) {
         info!("Starting wallet terminal session");
         println!("Welcome to Ryz Labs Wallet Terminal!");
         
+        // Main interaction loop
         loop {
             match self.show_menu() {
                 Ok(should_exit) => {
@@ -68,7 +85,12 @@ impl WalletTerminal {
         }
     }
 
+    /// Displays menu and processes user input
+    /// 
+    /// # Returns
+    /// * `io::Result<bool>` - True if user wants to exit, false otherwise
     fn show_menu(&mut self) -> io::Result<bool> {
+        // Display menu options
         println!("\nPlease select an option:");
         println!("1. Check Balance");
         println!("2. Deposit");
@@ -78,9 +100,11 @@ impl WalletTerminal {
         print!("\nEnter your choice (1-5): ");
         io::stdout().flush()?;
 
+        // Process user input
         let mut choice = String::new();
         io::stdin().read_line(&mut choice)?;
 
+        // Handle menu selection
         match choice.trim() {
             "1" => {
                 info!("Selected: Check Balance");
@@ -111,6 +135,10 @@ impl WalletTerminal {
         Ok(false)
     }
 
+    /// Gets wallet address from user input
+    /// 
+    /// # Returns
+    /// * `io::Result<String>` - Validated wallet address
     fn get_wallet_address(&self) -> io::Result<String> {
         print!("Enter wallet address: ");
         io::stdout().flush()?;
@@ -121,6 +149,10 @@ impl WalletTerminal {
         Ok(address)
     }
 
+    /// Gets transaction amount from user input
+    /// 
+    /// # Returns
+    /// * `io::Result<i64>` - Validated transaction amount
     fn get_amount(&self) -> io::Result<i64> {
         print!("Enter amount: ");
         io::stdout().flush()?;
@@ -139,6 +171,10 @@ impl WalletTerminal {
         }
     }
 
+    /// Processes balance check request
+    /// 
+    /// # Returns
+    /// * `io::Result<()>` - Success or failure of operation
     fn check_balance(&self) -> io::Result<()> {
         let wallet_address = self.get_wallet_address()?;
         match calculate_wallet_balance(&self.transactions, &wallet_address) {
@@ -154,6 +190,10 @@ impl WalletTerminal {
         Ok(())
     }
 
+    /// Processes deposit request
+    /// 
+    /// # Returns
+    /// * `io::Result<()>` - Success or failure of operation
     fn deposit(&mut self) -> io::Result<()> {
         let wallet_address = self.get_wallet_address()?;
         let amount = self.get_amount()?;
@@ -174,6 +214,10 @@ impl WalletTerminal {
         Ok(())
     }
 
+    /// Processes withdrawal request
+    /// 
+    /// # Returns
+    /// * `io::Result<()>` - Success or failure of operation
     fn withdraw(&mut self) -> io::Result<()> {
         let wallet_address = self.get_wallet_address()?;
         let amount = self.get_amount()?;
@@ -206,6 +250,10 @@ impl WalletTerminal {
         Ok(())
     }
 
+    /// Displays transaction history for a wallet
+    /// 
+    /// # Returns
+    /// * `io::Result<()>` - Success or failure of operation
     fn view_history(&self) -> io::Result<()> {
         let wallet_address = self.get_wallet_address()?;
         info!("Viewing transaction history for wallet {}", wallet_address);

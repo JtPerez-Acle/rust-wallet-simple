@@ -1,3 +1,6 @@
+//! Core library for the Ryz Labs Wallet Balance Tracker
+//! Provides transaction management, balance calculation, and logging functionality
+
 extern crate log;
 
 use fern::Dispatch;
@@ -6,15 +9,19 @@ use log::{info, error, LevelFilter};
 use thiserror::Error;
 use std::fmt;
 
-// Make the terminal module public and available
+// Export terminal module for external use
 pub mod terminal;
 
+/// Represents the types of transactions supported by the wallet system
 #[derive(Debug)]
 pub enum TransactionType {
+    /// Represents funds being added to a wallet
     Deposit,
+    /// Represents funds being removed from a wallet
     Withdrawal,
 }
 
+// Implement display formatting for transaction types
 impl fmt::Display for TransactionType {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
@@ -24,13 +31,18 @@ impl fmt::Display for TransactionType {
     }
 }
 
+/// Represents a single transaction in the wallet system
 #[derive(Debug)]
 pub struct Transaction {
+    /// Type of transaction (Deposit/Withdrawal)
     pub transaction_type: TransactionType,
+    /// Address of the wallet involved in the transaction
     pub wallet_address: String,
+    /// Amount of funds involved in the transaction
     pub amount: i64,
 }
 
+// Implement display formatting for transactions
 impl fmt::Display for Transaction {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(
@@ -41,11 +53,13 @@ impl fmt::Display for Transaction {
     }
 }
 
-// Custom error type
+/// Custom error types for wallet operations
 #[derive(Debug, Error)]
 pub enum WalletError {
+    /// Error for invalid transaction amounts (e.g., negative values)
     #[error("Invalid transaction amount: {0}")]
     InvalidAmount(i64),
+    /// Error for insufficient funds during withdrawal
     #[error("Insufficient funds for withdrawal of {requested}. Available balance: {available}")]
     InsufficientFunds {
         requested: i64,
@@ -53,6 +67,10 @@ pub enum WalletError {
     },
 }
 
+/// Initializes the logging system with test-specific configuration
+/// 
+/// # Arguments
+/// * `test_name` - Identifier for the test being executed
 pub fn init_logging(test_name: &str) {
     let test_name = test_name.to_string();
     let log_file_path = format!(
@@ -76,10 +94,22 @@ pub fn init_logging(test_name: &str) {
         .unwrap();
 }
 
+/// Logs a section header for test organization
+/// 
+/// # Arguments
+/// * `section` - Name of the test section
 pub fn log_section_header(section: &str) {
     info!("========== {} ==========", section);
 }
 
+/// Calculates the current balance for a specific wallet
+/// 
+/// # Arguments
+/// * `transactions` - Slice of transactions to process
+/// * `wallet_address` - Address of the wallet to calculate balance for
+/// 
+/// # Returns
+/// * `Result<i64, WalletError>` - Calculated balance or error if validation fails
 pub fn calculate_wallet_balance(
     transactions: &[Transaction],
     wallet_address: &str,
@@ -88,7 +118,9 @@ pub fn calculate_wallet_balance(
 
     let mut balance = 0;
 
+    // Process each transaction for the specified wallet
     for tx in transactions.iter().filter(|tx| tx.wallet_address == wallet_address) {
+        // Validate transaction amount
         if tx.amount < 0 {
             error!(
                 "Invalid transaction amount: {} in transaction {:?}",
@@ -97,12 +129,14 @@ pub fn calculate_wallet_balance(
             return Err(WalletError::InvalidAmount(tx.amount));
         }
 
+        // Update balance based on transaction type
         match tx.transaction_type {
             Deposit => {
                 info!("Deposit of {} to {}", tx.amount, tx.wallet_address);
                 balance += tx.amount;
             }
             Withdrawal => {
+                // Verify sufficient funds for withdrawal
                 if balance < tx.amount {
                     error!(
                         "Insufficient funds for withdrawal of {} from {}. Available balance: {}",
@@ -123,10 +157,16 @@ pub fn calculate_wallet_balance(
     Ok(balance)
 }
 
-/// Prints the transaction history for a given wallet, showing the transaction type, amount, and running balance.
+/// Displays transaction history for a specific wallet
+/// 
+/// # Arguments
+/// * `transactions` - Slice of transactions to display
+/// * `wallet_address` - Address of the wallet to show history for
 pub fn print_transaction_history(transactions: &[Transaction], wallet_address: &str) {
     let mut balance = 0;
     println!("Transaction history for wallet {}:", wallet_address);
+    
+    // Display each transaction with running balance
     for tx in transactions.iter().filter(|tx| tx.wallet_address == wallet_address) {
         match tx.transaction_type {
             TransactionType::Deposit => balance += tx.amount,

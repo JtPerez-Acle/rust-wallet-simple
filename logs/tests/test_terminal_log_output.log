@@ -1,53 +1,46 @@
-2024-11-07 16:30:21 [INFO] [test_terminal] Initializing new WalletTerminal instance
-2024-11-07 16:30:21 [INFO] [test_terminal] Final balance for wallet test_wallet: 0
-2024-11-07 16:30:21 [INFO] [test_terminal] Deposit of 50 to test_wallet
-2024-11-07 16:30:21 [ERROR] [test_terminal] Insufficient funds for withdrawal of 100 from test_wallet. Available balance: 50
-2024-11-07 16:30:21 [INFO] [test_terminal] Deposit of 100 to test_wallet
-2024-11-07 16:30:21 [INFO] [test_terminal] Withdrawal of 30 from test_wallet
-2024-11-07 16:30:21 [INFO] [test_terminal] Final balance for wallet test_wallet: 70
-2024-11-07 16:30:21 [INFO] [test_terminal] Deposit of 100 to history_wallet
-2024-11-07 16:30:21 [INFO] [test_terminal] Withdrawal of 30 from history_wallet
-2024-11-07 16:30:21 [INFO] [test_terminal] Deposit of 50 to history_wallet
-2024-11-07 16:30:21 [INFO] [test_terminal] Final balance for wallet history_wallet: 120
-2024-11-07 16:30:21 [INFO] [test_terminal] ========== Start Test: Empty Transaction List ==========
-2024-11-07 16:30:21 [INFO] [test_terminal] Final balance for wallet wallet_3: 0
-2024-11-07 16:30:21 [INFO] [test_terminal] ========== End Test: Empty Transaction List ==========
-2024-11-07 16:30:21 [INFO] [test_terminal] ========== Start Test: Mixed Transactions Multiple Wallets ==========
-2024-11-07 16:30:21 [INFO] [test_terminal] Deposit of 150 to wallet_6
-2024-11-07 16:30:21 [INFO] [test_terminal] Withdrawal of 50 from wallet_6
-2024-11-07 16:30:21 [INFO] [test_terminal] Final balance for wallet wallet_6: 100
-2024-11-07 16:30:21 [INFO] [test_terminal] Deposit of 200 to wallet_7
-2024-11-07 16:30:21 [INFO] [test_terminal] Withdrawal of 100 from wallet_7
-2024-11-07 16:30:21 [INFO] [test_terminal] Final balance for wallet wallet_7: 100
-2024-11-07 16:30:21 [INFO] [test_terminal] ========== End Test: Mixed Transactions Multiple Wallets ==========
-2024-11-07 16:30:21 [INFO] [test_terminal] ========== Start Test: Multiple Deposits ==========
-2024-11-07 16:30:21 [INFO] [test_terminal] Deposit of 100 to wallet_4
-2024-11-07 16:30:21 [INFO] [test_terminal] Deposit of 200 to wallet_4
-2024-11-07 16:30:21 [INFO] [test_terminal] Final balance for wallet wallet_4: 300
-2024-11-07 16:30:21 [INFO] [test_terminal] ========== End Test: Multiple Deposits ==========
-2024-11-07 16:30:21 [INFO] [test_terminal] ========== Start Test: Calculate Wallet Balance ==========
-2024-11-07 16:30:21 [INFO] [test_terminal] Deposit of 100 to wallet_1
-2024-11-07 16:30:21 [INFO] [test_terminal] Withdrawal of 30 from wallet_1
-2024-11-07 16:30:21 [INFO] [test_terminal] Final balance for wallet wallet_1: 70
-2024-11-07 16:30:21 [INFO] [test_terminal] ========== End Test: Calculate Wallet Balance ==========
-2024-11-07 16:30:21 [INFO] [test_terminal] ========== Start Test: Insufficient Funds ==========
-2024-11-07 16:30:21 [INFO] [test_terminal] Deposit of 50 to wallet_9
-2024-11-07 16:30:21 [ERROR] [test_terminal] Insufficient funds for withdrawal of 100 from wallet_9. Available balance: 50
-2024-11-07 16:30:21 [INFO] [test_terminal] ========== End Test: Insufficient Funds ==========
-2024-11-07 16:30:21 [INFO] [test_terminal] ========== Start Test: Invalid Transaction Amount ==========
-2024-11-07 16:30:21 [ERROR] [test_terminal] Invalid transaction amount: -100 in transaction Transaction { transaction_type: Deposit, wallet_address: "wallet_8", amount: -100 }
-2024-11-07 16:30:21 [INFO] [test_terminal] ========== End Test: Invalid Transaction Amount ==========
-2024-11-07 16:30:21 [INFO] [test_terminal] Deposit of 100 to wallet1
-2024-11-07 16:30:21 [INFO] [test_terminal] Final balance for wallet wallet1: 100
-2024-11-07 16:30:21 [INFO] [test_terminal] Deposit of 200 to wallet2
-2024-11-07 16:30:21 [INFO] [test_terminal] Final balance for wallet wallet2: 200
-2024-11-07 16:30:21 [INFO] [test_terminal] ========== Start Test: Multiple Withdrawals ==========
-2024-11-07 16:30:21 [INFO] [test_terminal] ========== Start Test: Transaction Creation ==========
-2024-11-07 16:30:21 [INFO] [test_terminal] ========== End Test: Transaction Creation ==========
-2024-11-07 16:30:21 [ERROR] [test_terminal] Insufficient funds for withdrawal of 50 from wallet_5. Available balance: 0
-2024-11-07 16:30:21 [INFO] [test_terminal] ========== End Test: Multiple Withdrawals ==========
-2024-11-07 16:30:21 [INFO] [test_terminal] ========== Start Test: Wallet Not in Transactions ==========
-2024-11-07 16:30:21 [INFO] [test_terminal] Final balance for wallet wallet_3: 0
-2024-11-07 16:30:21 [INFO] [test_terminal] ========== End Test: Wallet Not in Transactions ==========
-2024-11-07 16:30:21 [INFO] [test_terminal] ========== Start Test: Print Transaction History ==========
-2024-11-07 16:30:21 [INFO] [test_terminal] ========== End Test: Print Transaction History ==========
+2024-11-07 17:17:43 [INFO] [test_terminal] Initializing new WalletTerminal instance
+2024-11-07 17:17:43 [INFO] [test_terminal] Final balance for wallet test_wallet: 0
+2024-11-07 17:17:43 [INFO] [test_terminal] Deposit of 100 to history_wallet
+2024-11-07 17:17:43 [INFO] [test_terminal] Withdrawal of 30 from history_wallet
+2024-11-07 17:17:43 [INFO] [test_terminal] Deposit of 50 to history_wallet
+2024-11-07 17:17:43 [INFO] [test_terminal] Final balance for wallet history_wallet: 120
+2024-11-07 17:17:43 [INFO] [test_terminal] Deposit of 50 to test_wallet
+2024-11-07 17:17:43 [ERROR] [test_terminal] Insufficient funds for withdrawal of 100 from test_wallet. Available balance: 50
+2024-11-07 17:17:43 [INFO] [test_terminal] ========== Start Test: Calculate Wallet Balance ==========
+2024-11-07 17:17:43 [INFO] [test_terminal] Deposit of 100 to wallet_1
+2024-11-07 17:17:43 [INFO] [test_terminal] Withdrawal of 30 from wallet_1
+2024-11-07 17:17:43 [INFO] [test_terminal] Final balance for wallet wallet_1: 70
+2024-11-07 17:17:43 [INFO] [test_terminal] ========== End Test: Calculate Wallet Balance ==========
+2024-11-07 17:17:43 [INFO] [test_terminal] ========== Start Test: Insufficient Funds ==========
+2024-11-07 17:17:43 [INFO] [test_terminal] Deposit of 50 to wallet_9
+2024-11-07 17:17:43 [INFO] [test_terminal] ========== Start Test: Empty Transaction List ==========
+2024-11-07 17:17:43 [INFO] [test_terminal] ========== Start Test: Invalid Transaction Amount ==========
+2024-11-07 17:17:43 [ERROR] [test_terminal] Invalid transaction amount: -100 in transaction Transaction { transaction_type: Deposit, wallet_address: "wallet_8", amount: -100 }
+2024-11-07 17:17:43 [INFO] [test_terminal] Final balance for wallet wallet_3: 0
+2024-11-07 17:17:43 [INFO] [test_terminal] ========== End Test: Empty Transaction List ==========
+2024-11-07 17:17:43 [INFO] [test_terminal] ========== End Test: Invalid Transaction Amount ==========
+2024-11-07 17:17:43 [ERROR] [test_terminal] Insufficient funds for withdrawal of 100 from wallet_9. Available balance: 50
+2024-11-07 17:17:43 [INFO] [test_terminal] ========== End Test: Insufficient Funds ==========
+2024-11-07 17:17:43 [INFO] [test_terminal] ========== Start Test: Mixed Transactions Multiple Wallets ==========
+2024-11-07 17:17:43 [INFO] [test_terminal] Deposit of 150 to wallet_6
+2024-11-07 17:17:43 [INFO] [test_terminal] Withdrawal of 50 from wallet_6
+2024-11-07 17:17:43 [INFO] [test_terminal] Final balance for wallet wallet_6: 100
+2024-11-07 17:17:43 [INFO] [test_terminal] Deposit of 200 to wallet_7
+2024-11-07 17:17:43 [INFO] [test_terminal] Withdrawal of 100 from wallet_7
+2024-11-07 17:17:43 [INFO] [test_terminal] Final balance for wallet wallet_7: 100
+2024-11-07 17:17:43 [INFO] [test_terminal] ========== End Test: Mixed Transactions Multiple Wallets ==========
+2024-11-07 17:17:43 [INFO] [test_terminal] ========== Start Test: Multiple Deposits ==========
+2024-11-07 17:17:43 [INFO] [test_terminal] Deposit of 100 to wallet_4
+2024-11-07 17:17:43 [INFO] [test_terminal] Deposit of 200 to wallet_4
+2024-11-07 17:17:43 [INFO] [test_terminal] Final balance for wallet wallet_4: 300
+2024-11-07 17:17:43 [INFO] [test_terminal] ========== End Test: Multiple Deposits ==========
+2024-11-07 17:17:43 [INFO] [test_terminal] ========== Start Test: Print Transaction History ==========
+2024-11-07 17:17:43 [INFO] [test_terminal] ========== End Test: Print Transaction History ==========
+2024-11-07 17:17:43 [INFO] [test_terminal] ========== Start Test: Wallet Not in Transactions ==========
+2024-11-07 17:17:43 [INFO] [test_terminal] Final balance for wallet wallet_3: 0
+2024-11-07 17:17:43 [INFO] [test_terminal] ========== End Test: Wallet Not in Transactions ==========
+2024-11-07 17:17:43 [INFO] [test_terminal] ========== Start Test: Multiple Withdrawals ==========
+2024-11-07 17:17:43 [ERROR] [test_terminal] Insufficient funds for withdrawal of 50 from wallet_5. Available balance: 0
+2024-11-07 17:17:43 [INFO] [test_terminal] ========== End Test: Multiple Withdrawals ==========
+2024-11-07 17:17:43 [INFO] [test_terminal] ========== Start Test: Transaction Creation ==========
+2024-11-07 17:17:43 [INFO] [test_terminal] ========== End Test: Transaction Creation ==========
