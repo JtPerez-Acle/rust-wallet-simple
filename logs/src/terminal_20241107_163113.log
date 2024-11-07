@@ -1,0 +1,46 @@
+2024-11-07 16:31:13 [INFO] [Terminal] Initializing new WalletTerminal instance
+2024-11-07 16:31:13 [INFO] [Terminal] Starting wallet terminal session
+2024-11-07 16:31:19 [INFO] [Terminal] Selected: Deposit
+2024-11-07 16:31:20 [INFO] [Terminal] Wallet address entered: 1
+2024-11-07 16:31:22 [INFO] [Terminal] Amount entered: 1222
+2024-11-07 16:31:22 [INFO] [Terminal] Successful deposit of 1222 to wallet 1
+2024-11-07 16:31:26 [INFO] [Terminal] Selected: Withdraw
+2024-11-07 16:31:27 [INFO] [Terminal] Wallet address entered: 1
+2024-11-07 16:31:29 [INFO] [Terminal] Amount entered: 452
+2024-11-07 16:31:29 [INFO] [Terminal] Deposit of 1222 to 1
+2024-11-07 16:31:29 [INFO] [Terminal] Final balance for wallet 1: 1222
+2024-11-07 16:31:29 [INFO] [Terminal] Successful withdrawal of 452 from wallet 1
+2024-11-07 16:31:31 [INFO] [Terminal] Selected: Check Balance
+2024-11-07 16:31:32 [INFO] [Terminal] Wallet address entered: 1
+2024-11-07 16:31:32 [INFO] [Terminal] Deposit of 1222 to 1
+2024-11-07 16:31:32 [INFO] [Terminal] Withdrawal of 452 from 1
+2024-11-07 16:31:32 [INFO] [Terminal] Final balance for wallet 1: 770
+2024-11-07 16:31:32 [INFO] [Terminal] Balance check successful for 1: 770
+2024-11-07 16:31:52 [INFO] [Terminal] Selected: View History
+2024-11-07 16:31:55 [INFO] [Terminal] Wallet address entered: 1
+2024-11-07 16:31:55 [INFO] [Terminal] Viewing transaction history for wallet 1
+2024-11-07 16:32:06 [INFO] [Terminal] Selected: Deposit
+2024-11-07 16:32:07 [INFO] [Terminal] Wallet address entered: 2
+2024-11-07 16:32:09 [INFO] [Terminal] Amount entered: 543
+2024-11-07 16:32:09 [INFO] [Terminal] Successful deposit of 543 to wallet 2
+2024-11-07 16:32:11 [INFO] [Terminal] Selected: Deposit
+2024-11-07 16:32:13 [INFO] [Terminal] Wallet address entered: 2
+2024-11-07 16:32:14 [INFO] [Terminal] Amount entered: 112
+2024-11-07 16:32:14 [INFO] [Terminal] Successful deposit of 112 to wallet 2
+2024-11-07 16:32:16 [INFO] [Terminal] Selected: Withdraw
+2024-11-07 16:32:17 [INFO] [Terminal] Wallet address entered: 2
+2024-11-07 16:32:17 [INFO] [Terminal] Amount entered: 1
+2024-11-07 16:32:17 [INFO] [Terminal] Deposit of 543 to 2
+2024-11-07 16:32:17 [INFO] [Terminal] Deposit of 112 to 2
+2024-11-07 16:32:17 [INFO] [Terminal] Final balance for wallet 2: 655
+2024-11-07 16:32:17 [INFO] [Terminal] Successful withdrawal of 1 from wallet 2
+2024-11-07 16:32:19 [INFO] [Terminal] Selected: Check Balance
+2024-11-07 16:32:20 [INFO] [Terminal] Wallet address entered: 2
+2024-11-07 16:32:20 [INFO] [Terminal] Deposit of 543 to 2
+2024-11-07 16:32:20 [INFO] [Terminal] Deposit of 112 to 2
+2024-11-07 16:32:20 [INFO] [Terminal] Withdrawal of 1 from 2
+2024-11-07 16:32:20 [INFO] [Terminal] Final balance for wallet 2: 654
+2024-11-07 16:32:20 [INFO] [Terminal] Balance check successful for 2: 654
+2024-11-07 16:32:22 [INFO] [Terminal] Selected: View History
+2024-11-07 16:32:22 [INFO] [Terminal] Wallet address entered: 2
+2024-11-07 16:32:22 [INFO] [Terminal] Viewing transaction history for wallet 2
